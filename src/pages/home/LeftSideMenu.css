@@ -1,0 +1,25 @@
+.leftSideMenu {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+
+.leftSideMenu ul {
+	list-style: none;	
+	margin: 0;
+	padding: 0;
+}
+
+.leftSideMenu ul li {
+	padding: 12px 15px;
+	border-bottom: 1px solid #cecece;
+}
+
+.leftSideMenu ul li:hover {
+	cursor: pointer;
+}
+
+.leftSideMenu ul li:first-child {
+	border-left: 2px solid #004673;
+	background-color: #e4f3fb;
+}

@@ -1,0 +1,82 @@
+header {
+	font-family: "Source Sans Pro", sans-serif;
+}
+
+header .official-message {
+	background-color: #f3f3f3;
+	padding: 3px;
+}
+
+header .official-message .message {
+	display: flex;
+	align-items: center;
+	font-size: 0.8rem;
+}
+
+header .official-message .message::before {
+	content: url(./flag.png);
+	margin-right: 5px;
+}
+
+header .main-header {
+	background-color: #004673;
+}
+
+header .main-header .container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header .main-header .irs-logo {
+	padding: 25px 0px;
+}
+
+header .main-header menu {
+	display: flex;
+}
+
+header .main-header menu span {
+	color: white;
+	font-weight: bold;
+	padding: 3px 20px;
+	border-right: 2px solid white;
+}
+
+header .main-header menu span:last-child {
+	border-right: none;
+}
+
+header .main-header menu span:hover {
+	cursor: pointer;
+}
+
+header .main-navigation {
+	background-color: #002346;
+}
+
+header .main-navigation .container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header .main-navigation menu {
+	display: flex;
+	margin: 0;
+	padding: 0;
+}
+
+header .main-navigation menu span {
+	padding: 15px;
+	color: white;
+}
+
+header .main-navigation menu span:hover {
+	cursor: pointer;
+}
+
+header .main-navigation menu span:last-child {
+	background-color: #004673;
+	font-weight: bold;
+}

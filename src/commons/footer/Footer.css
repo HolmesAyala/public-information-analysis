@@ -1,0 +1,28 @@
+footer {
+	background-color: #f3f3f3;
+	margin-top: 20px;
+	padding: 20px 0;
+}
+
+footer .spacer {
+	border: 1px solid #d4d3d3;
+	margin: 10px;
+}
+
+footer section ul {
+	list-style: none;
+}
+
+footer section {
+	display: flex;
+	justify-content: space-around;
+}
+
+footer section ul li {
+	padding: 10px;
+}
+
+footer section ul li:first-child {
+	margin-bottom: 5px;
+	font-weight: bold;
+}

@@ -1,0 +1,15 @@
+.searcher {
+	padding: 30px;
+	background-color: #004673;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 25px;
+}
+
+.searcher input {
+	width: 100%;
+	padding: 7px;
+	border-radius: 5px;
+	border: none;
+}
