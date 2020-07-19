@@ -45,7 +45,7 @@ Implementation guide for the dashboard:
 
 ## Implement dashboard from template
 
-Access to this [template]([https://link](https://analytics.google.com/analytics/web/template?uid=ePGJ_KE3S16oWBj4sSUnmg)).
+Access to this [template](https://analytics.google.com/analytics/web/template?uid=ePGJ_KE3S16oWBj4sSUnmg).
 
 Choose your Google analytics account and fill the dashboard name and give click in "create":
 
