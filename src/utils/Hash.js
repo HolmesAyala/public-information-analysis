@@ -2,6 +2,7 @@ import Crypto from "crypto"
 
 /**
  * Generate a random HEX hash
+ * @returns {string}
  */
 function getRandomHash() {
 	var current_date = (new Date()).valueOf().toString();

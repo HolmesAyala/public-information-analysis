@@ -4,6 +4,9 @@ import { Typography, Box } from "@material-ui/core"
 
 import "./Searcher.css"
 
+/**
+ * The searcher of forms, instructions and publication
+ */
 class Searcher extends React.Component {
 	render() {
 		return (

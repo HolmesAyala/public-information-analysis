@@ -1,7 +1,17 @@
 import React from "react"
 import _ from "lodash"
 import Hash from "../../utils/Hash"
+import PropTypes from "prop-types"
 
+/**
+ * @typedef {Object} EventData
+ * @property {string} event The event name
+ * @property {string|number} [value] The event value
+ */
+
+/**
+ * View modes
+ */
 export const VIEW_MODE = {
 	FULL_WINDOW: "FULL_WINDOW",
 	SIZED_CONTAINER: "SIZED_CONTAINER",
@@ -9,6 +19,9 @@ export const VIEW_MODE = {
 	LIGHT_BOX: "LIGHT_BOX"
 }
 
+/**
+ * Document events
+ */
 export const EVENTS = {
 	CURRENT_PAGE: "CURRENT_PAGE",
 	OPEN: "OPEN",
@@ -22,6 +35,9 @@ export const EVENTS = {
 	TIME_IN_PAGE: "TIME_IN_PAGE"
 }
 
+/**
+ * Translations from adobe document events
+ */
 const ADOBE_EVENTS_TRANSLATIONS = {
 	CURRENT_ACTIVE_PAGE: "CURRENT_PAGE",
 	PDF_VIEWER_OPEN: "OPEN",
@@ -35,10 +51,36 @@ const ADOBE_EVENTS_TRANSLATIONS = {
 
 class Viewer extends React.Component {
 
+	static propTypes = {
+		fileName: PropTypes.string.isRequired,
+		url: PropTypes.string.isRequired,
+		/**
+		 * Visualization mode
+		 */
+		viewMode: PropTypes.oneOf(Object.keys(VIEW_MODE)),
+		/**
+		 * Options to customize document viewer
+		 */
+		previewOptions: PropTypes.shape({
+			enableFormFilling: PropTypes.bool,
+			showAnnotationTools: PropTypes.bool,
+			showLeftHandPanel: PropTypes.bool,
+			showDisabledSaveButton: PropTypes.bool
+		}),
+		style: PropTypes.any
+	}
+
+	static defaultProps = {
+		viewMode: VIEW_MODE.SIZED_CONTAINER,
+		previewOptions: {},
+		style: {}
+	}
+
 	adobeDCView = null
 
 	constructor(props) {
 		super(props)
+		// Generate a random ID for the document container
 		this.CONTAINER_ID = `viewer-${Hash.getRandomHash()}`
 	}
 
@@ -47,11 +89,17 @@ class Viewer extends React.Component {
 			this.reloadDocument()
 	}
 
+	/**
+	 * Create a new document with the properties provided
+	 */
 	reloadDocument() {
 		this.initializeAdobeView()
 		this.previewDocument()
 	}
 
+	/**
+	 * Create an instance of AdobeDC.View
+	 */
 	initializeAdobeView() {
 		let startConfig = { 
 			clientId: process.env.REACT_APP_ADOBE_CLIENT_VIEW_ID, 
@@ -73,6 +121,10 @@ class Viewer extends React.Component {
 		)
 	}
 
+	/**
+	 * Callback for adobe events
+	 * @param {Object} adobeEvent 
+	 */
 	onAdobeDocumentEvent(adobeEvent) {
 		let isEventToListen = Object.keys(ADOBE_EVENTS_TRANSLATIONS).includes(adobeEvent.type)
 
@@ -97,18 +149,19 @@ class Viewer extends React.Component {
 			this.reloadDocument()
 	}
 
+	/**
+	 * Call the previewFile method with the provided properties.
+	 */
 	previewDocument() {
 		try {
-			let previewOptions = this.props.previewOptions || {}
-
 			let documentData = {
 				content: { location: { url: this.props.url } },
 				metaData: { fileName: this.props.fileName },
 			}
 
 			let viewerOptions = {
-				embedMode: this.props.viewMode || VIEW_MODE.SIZED_CONTAINER,
-				...previewOptions
+				embedMode: this.props.viewMode,
+				...this.props.previewOptions
 			}
 
 			this.adobeDCView.previewFile(documentData, viewerOptions);
@@ -120,6 +173,7 @@ class Viewer extends React.Component {
 	/**
 	 * Get relevant adobeEvent information
 	 * @param {Object} adobeEvent The adobe event
+	 * @returns {EventData} The resulting event data
 	 */
 	getEventDataFromAdobeEvent(adobeEvent) {
 		let localEvent = ADOBE_EVENTS_TRANSLATIONS[adobeEvent.type]
@@ -148,7 +202,7 @@ class Viewer extends React.Component {
 	}
 
 	render() {
-		let style = _.get(this.props, "style", {})
+		let { style } = this.props
 
 		return <div id={this.CONTAINER_ID} style={style}></div>
 	}

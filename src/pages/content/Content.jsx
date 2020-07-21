@@ -17,6 +17,9 @@ import Viewer, { VIEW_MODE } from "../../components/pdf/Viewer"
 
 import FormInformationCard from "./FormInformationCard"
 
+/**
+ * Page with a form and it's instructions
+ */
 class Content extends React.Component {
 
 	formAPI = new FormAPI()
@@ -24,8 +27,12 @@ class Content extends React.Component {
 	constructor(props) {
 		super(props)
 
+		 // Initial time with this form
 		this.startTime = null
-		this.endTime = null
+		/**
+		 * Ref for:
+		 * - Call it's show method
+		 */
 		this.instructionsViewerRef = React.createRef()
 
 		this.state = {
@@ -54,6 +61,7 @@ class Content extends React.Component {
 		if (!this.state.form) return;
 
 		try {
+			// Send the total time in with the current form
 			let endTime = new Date()
 
 			let secondsTime = parseInt((endTime - this.startTime) / 1000)
@@ -68,10 +76,17 @@ class Content extends React.Component {
 		}
 	}
 
+	/**
+	 * Gets called when the user want to see instructions
+	 */
 	onShowInstructions = () => {
 		this.instructionsViewerRef.current.show()
 	}
 
+	/**
+	 * Callback when an event over form viewer is produced
+	 * @param {EventData} eventData 
+	 */
 	onEvent_formViewer = async (eventData) => {
 		try {
 			await Analitycs.sendEvent({
@@ -84,6 +99,10 @@ class Content extends React.Component {
 		}
 	}
 
+	/**
+	 * Callback when an event over instructions viewer is produced
+	 * @param {EventData} eventData 
+	 */
 	onEvent_instructionsViewer = async (eventData) => {
 		try {
 			await Analitycs.sendEvent({
@@ -96,12 +115,28 @@ class Content extends React.Component {
 		}
 	}
 
+	/**
+	 * Callback when the user toggle the form filling checkbox
+	 * @param {Object} event 
+	 */
 	onChange_checkBoxFormFill = (event) => {
+		if(event.target.checked) {
+			Analitycs.sendEvent({
+				category: this.state.form.form.name,
+				action: "FORM_FILLING"
+			})
+			.catch(error => console.log(error))
+		}
+		
 		this.setState({
 			formFillingEnabled: event.target.checked
 		})
 	}
 
+	/**
+	 * @param {Object} form 
+	 * @param {boolean} enableFormFilling 
+	 */
 	getFormViewer(form, enableFormFilling) {
 		return (
 			<Viewer
@@ -119,6 +154,9 @@ class Content extends React.Component {
 		)
 	}
 
+	/**
+	 * @param {Object} form 
+	 */
 	getInstructionsViewer(form) {
 		return (
 			<Viewer
@@ -139,7 +177,7 @@ class Content extends React.Component {
 		let { form, formFillingEnabled } = this.state
 
 		if (!form)
-			return null
+			return <div>Loading...</div>
 
 		let navigatorComponent = (
 			<Box paddingY={3}>

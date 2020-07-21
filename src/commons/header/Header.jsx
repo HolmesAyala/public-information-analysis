@@ -4,6 +4,9 @@ import IRSLogo from "./IRS-Logo.svg"
 
 import "./Header.css"
 
+/**
+ * The IRS header
+ */
 class Header extends React.Component {
 
 	render() {

@@ -4,11 +4,14 @@ import { Container } from "@material-ui/core"
 import FooterLogo from "./footer-logo.svg"
 import "./Footer.css"
 
+/**
+ * The IRS footer
+ */
 function Footer() {
 	return (
 		<footer>
 			<Container className="container">
-				<img src={FooterLogo} width="136px"></img>
+				<img src={FooterLogo} alt="IRS Logo" width="136px"></img>
 
 				<div className="spacer"></div>
 

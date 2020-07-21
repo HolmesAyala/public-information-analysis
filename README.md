@@ -1,68 +1,134 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Consumption, Measurement and Analysis of Public IRS Information
 
-## Available Scripts
+## Use case
 
-In the project directory, you can run:
+Due to the current times of COVID-19, access to digital resources is increasing. Therefore, the IRS is interested in providing a better service to access your forms, integrating the forms and instructions on its home page.
 
-### `yarn start`
+The IRS needs to obtain data on user interaction with the forms and their corresponding instructions, such as:
+- Total user views of forms and instructions
+- User views for each form
+- Total downloads per form
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Because users can search in the instructions and access external resources provided in the instructions, it is recommended that you provide information about user searches and access to external resources by users.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Lastly, forms have fields to fill out, you should consider allowing users to do so.
 
-### `yarn test`
+## Video
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Resource][video_demostration]
 
-### `yarn build`
+## Docs
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Google analytics dashboard][google-analytics-doc]
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## PDF Files used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The files used are in `public/forms` folder.
 
-### `yarn eject`
+## Technologies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [React JS][react_js]
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Dependencies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Node js v14.3
+- [Material UI][material_ui]
+- [Joi][joi]
+- [Lodash][lodash]
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### External libraries
 
-## Learn More
+- [Abode PDF view SDK][adobe_view_sdk_link]
+- [Google analytics][google_analytics_link]
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Application builder
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Create react app][create_react_app]
 
-### Code Splitting
+## Environment Variables
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- REACT_APP_ADOBE_CLIENT_VIEW_ID
+  - The client ID for use the document services PDF
+- REACT_APP_ANALYTICS_ID
+  - The application tracker ID of Google analytics (You can view [here][google-analytics-doc] how to get the traker ID)
 
-### Analyzing the Bundle Size
+## Development deploy
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Create a `.env` file in the project root directory and set de **Enviroment Variables**:
 
-### Making a Progressive Web App
+```
+REACT_APP_ADOBE_CLIENT_VIEW_ID=some_value
+REACT_APP_ANALYTICS_ID=some_value
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Install dependencies:
 
-### Advanced Configuration
+```bash
+yarn install
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Start app in development mode:
 
-### Deployment
+```bash
+yarn run start
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Your app will be located in http://localhost:3000.
 
-### `yarn build` fails to minify
+## Production deploy
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Because the app was created with [create react app][create_react_app], you can found how to deploy the app in services like to [Heroku][heroku] in the [deployment section][create-react-app-deployment]. 
+
+## Issues found
+
+### Update parameters over a document showed
+
+No way was found in the SDK documentation to update the parameters of a displayed document. Therefore is necessary create again an AdobeDC.View instance and call the previewFile method.
+
+For example, the document reload when the `enableFormFilling` parameter is actualized:
+
+![Form viewer reload](./doc/../docs/img/readme/form_viewer_reload.gif)
+
+When we want to view again a document in `LIGHT_BOX` mode, we need reload the document again:
+
+![Form viewer reload](./doc/../docs/img/readme/instruction_viewer_reload.gif)
+
+That can be solved simulating `LIGHT_BOX` mode with a dialog component.
+
+### Enable form filling
+
+Some documents have fields doesn't supported to the SDK:
+
+![Form filling issue](./docs/img/readme/form-filling-issue.png)
+
+
+<!-- Technologies -->
+[react_js]: https://reactjs.org/
+
+<!-- Dependencies -->
+
+[material_ui]: https://material-ui.com/
+[joi]: https://www.npmjs.com/package/joi
+[lodash]: https://www.npmjs.com/package/lodash
+
+<!-- External libraries -->
+
+[adobe_view_sdk_link]: https://www.adobe.com/devnet-docs/dcsdk_io/viewSDK/
+[google_analytics_link]: https://developers.google.com/analytics/devguides/collection/analyticsjs
+
+<!-- Application builder -->
+
+[create_react_app]: https://create-react-app.dev/
+
+<!-- Docs -->
+
+[google-analytics-doc]: ./docs/GoogleAnalytics.md
+[create-react-app-deployment]: https://create-react-app.dev/docs/deployment
+
+<!-- Web pages -->
+
+[heroku]: https://www.heroku.com/
+
+<!-- Own resources -->
+
+[video_demostration]: https://www.youtube.com/watch?v=KVKAEfeufRs

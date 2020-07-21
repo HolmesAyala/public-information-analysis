@@ -45,7 +45,7 @@ Implementation guide for the dashboard:
 
 ## Implement dashboard from template
 
-Access to this [template](https://analytics.google.com/analytics/web/template?uid=ePGJ_KE3S16oWBj4sSUnmg).
+Access to this [template](https://analytics.google.com/analytics/web/template?uid=OF83OKsUTRmmDOTwwXAU6w).
 
 Choose your Google analytics account and fill the dashboard name and give click in "create":
 
@@ -108,3 +108,9 @@ You must create the widgets with the next parameter values:
 ### What external resources the user access?
 
 ![What external resources the user access?](./img/create-dashboard/what-external-resources-the-users-access.png)
+
+### How long (seconds) do users take in forms?
+
+![How long (seconds) do users take in forms?](./img/create-dashboard/how-long-seconds-do-users-take-in-forms-1.png)
+
+![How long (seconds) do users take in forms?](./img/create-dashboard/how-long-seconds-do-users-take-in-forms-2.png)

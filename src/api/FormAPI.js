@@ -4,7 +4,7 @@ class FormAPI {
 	/**
 	 * Get one form
 	 * @param {String} id
-	 * @returns {Promise<Object | null>} The form
+	 * @returns {Promise<Object | null>}
 	 */
 	async getById(id) {
 		let forms = await this.getAll();
@@ -16,7 +16,7 @@ class FormAPI {
 
 	/**
 	 * Get all forms
-	 * @returns {Promise<Array>} Form list
+	 * @returns {Promise<Array<Object>>}
 	 */
 	async getAll() {
 		return Data.forms;

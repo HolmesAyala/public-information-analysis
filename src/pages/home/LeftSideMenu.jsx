@@ -2,6 +2,10 @@ import React from "react"
 
 import "./LeftSideMenu.css"
 
+/**
+ * The left side menu of additional filters
+ * to the form, instructions and publications.
+ */
 class LeftSideMenu extends React.Component {
 
 	render() {

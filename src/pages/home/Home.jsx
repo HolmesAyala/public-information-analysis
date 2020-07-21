@@ -6,6 +6,9 @@ import CardList from "../../components/form/CardList"
 import LeftSideMenu from "./LeftSideMenu"
 import Searcher from "./Searcher"
 
+/**
+ * The home page
+ */
 class Home extends React.Component {
 
 	formAPI = new FormAPI()
@@ -28,6 +31,10 @@ class Home extends React.Component {
 		}
 	}
 
+	/**
+	 * Gets called when the user give click in card item
+	 * @param {Object} form 
+	 */
 	onClickItem_cardList = (form) => {
 		this.props.history.push(`/content/${form.id}`)
 	}
